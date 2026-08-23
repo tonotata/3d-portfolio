@@ -1,0 +1,324 @@
+/* =========================
+   GENERAL
+   ========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: #f3eadb;
+    color: #3b2a20;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+
+/* =========================
+   TOP NAVIGATION
+   ========================= */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: #4a3024;
+    border-bottom: 4px solid #8b634b;
+}
+
+/* Navigation buttons on the LEFT */
+
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-buttons a,
+.nav-buttons button {
+    border: none;
+    background: none;
+    color: #f3eadb;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    transition: 0.25s ease;
+}
+
+/* Hover */
+
+.nav-buttons a:hover,
+.nav-buttons button:hover {
+    color: #d6aa82;
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   LANGUAGE SELECTOR
+   ========================= */
+
+#lang-switcher {
+    padding: 7px 10px;
+    border: 1px solid #8b634b;
+    border-radius: 6px;
+    background-color: #f3eadb;
+    color: #3b2a20;
+    font-family: Georgia, "Times New Roman", serif;
+    cursor: pointer;
+}
+
+
+/* =========================
+   INTRODUCTION
+   ========================= */
+
+.introduction {
+    text-align: center;
+    max-width: 900px;
+    margin: 55px auto 35px;
+    padding: 0 20px;
+}
+
+.introduction h1 {
+    margin-bottom: 12px;
+    color: #4a3024;
+    font-size: 42px;
+}
+
+.introduction h3 {
+    margin-top: 0;
+    color: #765541;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+
+/* =========================
+   WHAT'S NEW
+   ========================= */
+
+body > h3 {
+    text-align: center;
+    margin: 40px 0 20px;
+    color: #4a3024;
+    font-size: 27px;
+}
+
+
+/* =========================
+   SLIDESHOW
+   ========================= */
+
+.slideshow-container {
+    max-width: 850px;
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+    border: 8px solid #4a3024;
+    border-radius: 12px;
+    background-color: #2f211a;
+    box-shadow: 0 10px 30px rgba(59, 42, 32, 0.25);
+}
+
+
+/* Hide slides by default */
+
+.mySlides {
+    display: none;
+    position: relative;
+}
+
+
+/* Images */
+
+.mySlides img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+
+/* =========================
+   SLIDE NUMBER
+   ========================= */
+
+.numbertext {
+    color: #f3eadb;
+    font-size: 14px;
+    padding: 10px 14px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(59, 42, 32, 0.75);
+    border-bottom-right-radius: 8px;
+    z-index: 2;
+}
+
+
+/* =========================
+   CAPTION
+   ========================= */
+
+.text {
+    color: #f3eadb;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background: linear-gradient(
+        transparent,
+        rgba(47, 33, 26, 0.9)
+    );
+}
+
+
+/* =========================
+   PREVIOUS / NEXT BUTTONS
+   ========================= */
+
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 15px 18px;
+    color: #f3eadb;
+    font-size: 25px;
+    font-weight: bold;
+    background-color: rgba(59, 42, 32, 0.65);
+    user-select: none;
+    transition: 0.25s ease;
+    z-index: 3;
+}
+
+.prev {
+    left: 10px;
+    border-radius: 8px;
+}
+
+.next {
+    right: 10px;
+    border-radius: 8px;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: #8b634b;
+    transform: translateY(-50%) scale(1.08);
+}
+
+
+/* =========================
+   DOTS
+   ========================= */
+
+.dots-container {
+    text-align: center;
+    margin-top: 18px;
+}
+
+.dot {
+    cursor: pointer;
+    height: 11px;
+    width: 11px;
+    margin: 0 5px;
+    background-color: #c6ad97;
+    border-radius: 50%;
+    display: inline-block;
+    transition: 0.25s ease;
+}
+
+.active,
+.dot:hover {
+    background-color: #6b4937;
+    transform: scale(1.2);
+}
+
+
+/* =========================
+   FADE ANIMATION
+   ========================= */
+
+.fade {
+    animation-name: fade;
+    animation-duration: 0.6s;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0.4;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .nav-buttons {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .nav-buttons a,
+    .nav-buttons button {
+        font-size: 14px;
+        padding: 6px 8px;
+    }
+
+    #lang-switcher {
+        flex-shrink: 0;
+    }
+
+    .introduction h1 {
+        font-size: 30px;
+    }
+
+    .slideshow-container {
+        width: 94%;
+    }
+
+    .text {
+        font-size: 16px;
+    }
+    .introduction {
+    text-align: center;
+    max-width: 900px;
+    margin: 55px auto 35px;
+    padding: 0 20px;
+}
+
+    .introduction h1 {
+        margin-bottom: 12px;
+        color: #4a3024;
+        font-size: 42px;
+    }
+
+    .introduction h3 {
+        margin-top: 0;
+        color: #765541;
+        font-size: 18px;
+        font-weight: normal;
+}
+}

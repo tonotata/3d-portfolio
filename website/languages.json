@@ -1,0 +1,40 @@
+{
+  "en": {
+    "title": "Tonota's 3d Portfolio",
+    "homebtn": "Home",
+    "3dbtn": "3d Library",
+    "socialbtn": "Social Media",
+    "pagetitle": "Welcome to Tonota's 3d Portfolio!",
+    "subtitle": "Here you can download some of her 3d models <u><i>FOR FREE</i></u>!",
+    "new": "What's new?",
+    "rusty": "Rusty Box",
+    "chair": "Chairs",
+    "pillar": "Pillar",
+    "torch": "Torch",
+    "3dlib": "Tonota's 3D Library",
+    "3ddesc": "Free 3D models, game assets and textures. Everything here is free to download.",
+    "mymodels": "My Models",
+    "downloadeverything": "Download everything",
+    "cartnote": "All models are free. The button above combines your selected downloads into one ZIP file.",
+    "follow": "Follow me and keep up with new projects, models and updates! <br> Feel free to request a model!"
+},
+  "es": {
+    "title": "Portfolio 3d de Tonota!",
+    "homebtn": "Inicio",
+    "3dbtn": "Biblioteca 3d",
+    "socialbtn": "Redes Sociales",
+    "pagetitle": "Bienvenido al Portfolio 3d de Tonota!",
+    "subtitle": "Aquí puedes descargar algunos de sus modelos de forma <u><i>GRATUITA</i></u>!",
+    "new": "Qué es lo nuevo?",
+    "rusty": "Caja Oxidada",
+    "chair": "Sillas",
+    "pillar": "Pilar",
+    "torch": "Antorcha",
+    "3dlib": "Biblioteca 3d de Tonota",
+    "3ddesc": "Modelos 3d gratis, assets para juegos y texturas. Todo aqui lo puedes descargar gratis.",
+    "mymodels": "Mis modelos",
+    "downloadeverything": "Descargar todo",
+    "cartnote": "Todos los modelos son gratuitos. Este botón combina Todas las descargas seleccionadas en un archivo ZIP.",
+    "follow": "¡Sígueme y mantente al día con nuevos proyectos, modelos y actualizaciones! <br> ¡No dudes en solicitar un modelo!"
+  }
+}

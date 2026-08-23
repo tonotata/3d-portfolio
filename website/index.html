@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tonota's 3d portfolio, game assets and models free to download">
+    <link rel="icon" href="images/favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <title data-key="title">Tonota's 3d Portfolio!</title>
+</head>
+<body>
+
+    <div class="navbar">
+
+    <div class="nav-buttons">
+        <a href="index.html" data-key="homebtn">Home</a>
+        <a href="3dlibrary.html"data-key="3dbtn">3D Library</a>
+        <a href="socialmedia.html">Socaial Media</a>
+    </div>
+
+    <select id="lang-switcher">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+    </select>
+
+</div>
+
+    <div class="introduction">
+        <h1 data-key="pagetitle">Welcome to Tonota's 3d Portfolio!</h1>
+        <h3 data-key="subtitle">Here you can download some of her 3d models <u><i>FOR FREE</i></u>!</h3>
+    </div>
+    <h3 data-key="new">What's new?</h3>
+    <!-- Slideshow container -->
+    <div class="slideshow-container">
+
+    <!-- Full-width images with number and caption text -->
+    <div class="mySlides fade">
+        <div class="numbertext">1 / 4</div>
+        <img src="previews/box/box.png" style="width:100%">
+        <div class="text" data-key="rusty">Rusty Box</div>
+    </div>
+    
+    <div class="mySlides fade">
+        <div class="numbertext">2 / 4</div>
+        <img src="previews/chair/Chairs.png" style="width:100%">
+        <div class="text" data-key="chair">Chairs</div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">3 / 4</div>
+        <img src="previews/pillar/pillar render.png" style="width:100%">
+        <div class="text" data-key="pillar">Pillar</div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">4 / 4</div>
+        <img src="previews/torch/preview.png" style="width:100%">
+        <div class="text" data-key="torch">Torch</div>
+    </div>
+
+    <!-- Next and previous buttons -->
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+    <br>
+
+    <!-- The dots/circles -->
+    <div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>

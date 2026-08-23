@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Tonota's free 3D model and texture library"
+    >
+
+    <link rel="icon" href="images/favicon.png">
+
+    <title>Tonota's 3D Library</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #f3eadb;
+            --cream-dark: #e7d7c2;
+            --brown-dark: #3b281d;
+            --brown: #5b3b2a;
+            --brown-light: #8a6349;
+            --text-light: #fff8ee;
+            --shadow: rgba(59, 40, 29, 0.18);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--cream);
+            color: var(--brown-dark);
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+
+        /* =========================
+           NAVIGATION
+           ========================= */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 12px 25px;
+
+            background: var(--brown-dark);
+            border-bottom: 4px solid var(--brown-light);
+
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+
+            font: bold 16px Georgia, "Times New Roman", serif;
+
+            text-decoration: none;
+
+            transition: 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: #d8b18f;
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================
+           LANGUAGE SELECTOR
+           ========================= */
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        #lang-switcher {
+            padding: 7px 10px;
+
+            border: 1px solid #8b634b;
+            border-radius: 6px;
+
+            background-color: #f3eadb;
+            color: #3b2a20;
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 14px;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           GENERAL
+           ========================= */
+
+        .page {
+            width: min(1200px, 92%);
+            margin: auto;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 65px 20px 45px;
+        }
+
+        .hero h1 {
+            margin: 0 0 12px;
+
+            color: var(--brown-dark);
+
+            font-size: clamp(34px, 5vw, 55px);
+        }
+
+        .hero p {
+            max-width: 700px;
+
+            margin: auto;
+
+            color: var(--brown);
+
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .section-title {
+            margin: 20px 0 25px;
+            font-size: 30px;
+        }
+
+
+        /* =========================
+           SEARCH / FILTERS
+           ========================= */
+
+        .library-tools {
+            display: flex;
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+            margin-bottom: 30px;
+        }
+
+        .library-tools input,
+        .library-tools select {
+            padding: 12px 14px;
+
+            background: #fffaf3;
+            color: var(--brown-dark);
+
+            border: 1px solid var(--cream-dark);
+            border-radius: 8px;
+
+            font: 15px Georgia, "Times New Roman", serif;
+        }
+
+        .library-tools input {
+            flex: 1;
+            min-width: 220px;
+        }
+
+
+        /* =========================
+           MODEL GRID
+           ========================= */
+
+        .model-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fill, minmax(260px, 1fr));
+
+            gap: 24px;
+
+            padding-bottom: 70px;
+        }
+
+        .model-card {
+            overflow: hidden;
+
+            background: #fffaf3;
+
+            border: 1px solid var(--cream-dark);
+            border-radius: 14px;
+
+            box-shadow: 0 8px 22px var(--shadow);
+
+            transition: 0.25s ease;
+        }
+
+        .model-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow: 0 14px 30px var(--shadow);
+        }
+
+
+        /* =========================
+           CARD PREVIEW
+           ========================= */
+
+        .card-preview {
+            position: relative;
+
+            height: 210px;
+
+            overflow: hidden;
+
+            background: #2f2119;
+
+            cursor: pointer;
+        }
+
+        .card-preview img,
+        .card-preview video {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+        }
+
+        .preview-label {
+            position: absolute;
+
+            bottom: 10px;
+            left: 10px;
+
+            padding: 5px 9px;
+
+            background: rgba(47, 33, 25, 0.78);
+
+            color: var(--text-light);
+
+            border-radius: 6px;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           CARD BODY
+           ========================= */
+
+        .card-body {
+            padding: 18px;
+        }
+
+        .card-body h3 {
+            margin: 0 0 7px;
+            font-size: 22px;
+        }
+
+        .card-body p {
+            min-height: 45px;
+
+            margin: 0 0 15px;
+
+            color: #6f5543;
+
+            line-height: 1.45;
+        }
+
+
+        /* =========================
+           TAGS
+           ========================= */
+
+        .tag {
+            display: inline-block;
+
+            padding: 5px 9px;
+
+            margin: 0 5px 8px 0;
+
+            background: var(--cream-dark);
+            color: var(--brown);
+
+            border-radius: 20px;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           CARD BUTTON
+           ========================= */
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+
+            margin-top: 10px;
+        }
+
+        .primary-button {
+            width: 100%;
+
+            padding: 10px 12px;
+
+            border: 1px solid var(--brown);
+            border-radius: 8px;
+
+            background: var(--brown);
+            color: var(--text-light);
+
+            cursor: pointer;
+
+            font: bold 14px Georgia, "Times New Roman", serif;
+
+            transition: 0.2s ease;
+        }
+
+        .primary-button:hover {
+            background: var(--brown-light);
+        }
+
+
+        /* =========================
+           DETAIL VIEW
+           ========================= */
+
+        #detail-view {
+            display: none;
+
+            padding: 45px 0 80px;
+        }
+
+        #detail-view.visible {
+            display: block;
+        }
+
+        .back-button {
+            border: 0;
+
+            background: none;
+
+            color: var(--brown);
+
+            cursor: pointer;
+
+            font: bold 16px Georgia, "Times New Roman", serif;
+
+            margin-bottom: 25px;
+        }
+
+        .back-button:hover {
+            text-decoration: underline;
+        }
+
+        .detail-layout {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.3fr)
+                minmax(280px, 0.7fr);
+
+            gap: 35px;
+
+            align-items: start;
+        }
+
+
+        /* =========================
+           DETAIL MEDIA
+           ========================= */
+
+        .detail-media {
+            overflow: hidden;
+
+            background: #2f2119;
+
+            border: 8px solid var(--brown-dark);
+            border-radius: 14px;
+
+            box-shadow: 0 12px 30px var(--shadow);
+        }
+
+        .detail-media-main {
+            position: relative;
+
+            aspect-ratio: 16 / 10;
+        }
+
+        .detail-media-main img,
+        .detail-media-main video {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+        }
+
+        .media-controls {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 10px;
+
+            background: var(--brown-dark);
+        }
+
+        .media-controls button {
+            border: 0;
+            border-radius: 7px;
+
+            padding: 8px 13px;
+
+            background: var(--brown);
+            color: var(--cream);
+
+            cursor: pointer;
+
+            font: bold 14px Georgia, "Times New Roman", serif;
+        }
+
+        .media-controls button:hover {
+            background: var(--brown-light);
+        }
+
+        .media-counter {
+            color: var(--cream);
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           DETAIL INFO
+           ========================= */
+
+        .detail-info {
+            padding: 25px;
+
+            background: #fffaf3;
+
+            border: 1px solid var(--cream-dark);
+            border-radius: 14px;
+
+            box-shadow: 0 8px 22px var(--shadow);
+        }
+
+        .detail-info h1 {
+            margin-top: 0;
+            font-size: 36px;
+        }
+
+        .detail-info p {
+            color: #6f5543;
+
+            line-height: 1.7;
+        }
+
+        .info-list {
+            padding: 0;
+
+            list-style: none;
+        }
+
+        .info-list li {
+            padding: 9px 0;
+
+            border-bottom: 1px solid var(--cream-dark);
+        }
+
+
+        /* =========================
+           DOWNLOAD BUTTON
+           ========================= */
+
+        .download-button {
+            width: 100%;
+
+            margin-top: 20px;
+
+            padding: 14px;
+
+            border: 0;
+            border-radius: 8px;
+
+            background: var(--brown-dark);
+            color: var(--cream);
+
+            cursor: pointer;
+
+            font: bold 16px Georgia, "Times New Roman", serif;
+        }
+
+        .download-button:hover {
+            background: var(--brown-light);
+        }
+
+
+        /* =========================
+           MOBILE
+           ========================= */
+
+        @media (max-width: 800px) {
+
+            nav {
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
+
+            .detail-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            nav {
+                justify-content: flex-start;
+
+                overflow-x: auto;
+            }
+
+            .hero {
+                padding-top: 40px;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .model-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVIGATION
+         ========================= -->
+
+    <nav>
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="3dlibrary.html">
+                3D Library
+            </a>
+
+            <a href="socialmedia.html">
+                Social Media
+            </a>
+
+        </div>
+
+
+        <div class="nav-right">
+
+            <select id="lang-switcher">
+
+                <option value="en">
+                    English
+                </option>
+
+                <option value="es">
+                    Español
+                </option>
+
+            </select>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         LIBRARY VIEW
+         ========================= -->
+
+    <main id="library-view">
+
+        <section class="hero">
+
+            <h1 data-key="3dlib">
+                Tonota's 3D Library
+            </h1>
+
+            <p data-key="3ddesc">
+                Free 3D models, game assets and textures.
+                Everything here is free to download.
+            </p>
+
+        </section>
+
+
+        <section class="page" id="library">
+
+            <h2 class="section-title" data-key="mymodels">
+                My Models
+            </h2>
+
+
+            <div class="library-tools">
+
+                <input
+                    id="search"
+                    type="search"
+                    placeholder="Search models..."
+                    oninput="renderModels()"
+                >
+
+
+                <select
+                    id="category-filter"
+                    onchange="renderModels()"
+                >
+
+                    <option value="all">
+                        Everything
+                    </option>
+
+                    <option value="Prop">
+                        Props
+                    </option>
+
+                    <option value="Environment">
+                        Environment
+                    </option>
+
+                    <option value="Character">
+                        Characters
+                    </option>
+
+                    <option value="Texture">
+                        Textures
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div
+                class="model-grid"
+                id="model-grid"
+            >
+                <!-- Models generated by JavaScript -->
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================
+         MODEL DETAIL VIEW
+         ========================= -->
+
+    <section id="detail-view">
+
+        <div class="page">
+
+            <button
+                class="back-button"
+                onclick="showLibrary()"
+            >
+                ← Back to library
+            </button>
+
+
+            <div class="detail-layout">
+
+
+                <!-- MEDIA -->
+
+                <div class="detail-media">
+
+                    <div
+                        class="detail-media-main"
+                        id="detail-media"
+                    >
+                        <!-- Preview inserted by JavaScript -->
+                    </div>
+
+
+                    <div class="media-controls">
+
+                        <button onclick="previousPreview()">
+                            ← Previous
+                        </button>
+
+                        <span
+                            class="media-counter"
+                            id="media-counter"
+                        >
+                            1 / 1
+                        </span>
+
+                        <button onclick="nextPreview()">
+                            Next →
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- INFORMATION -->
+
+                <div class="detail-info">
+
+                    <h1 id="detail-title">
+                        Model name
+                    </h1>
+
+
+                    <div id="detail-tags"></div>
+
+
+                    <p id="detail-description">
+                        Model description.
+                    </p>
+
+
+                    <ul class="info-list">
+
+                        <li>
+                            <strong>Format:</strong>
+                            <span id="detail-format"></span>
+                        </li>
+
+                        <li>
+                            <strong>Polycount:</strong>
+                            <span id="detail-polycount"></span>
+                        </li>
+
+                        <li>
+                            <strong>Textures:</strong>
+                            <span id="detail-textures"></span>
+                        </li>
+
+                        <li>
+                            <strong>License:</strong>
+                            <span id="detail-license"></span>
+                        </li>
+
+                    </ul>
+
+
+                    <button
+                        class="download-button"
+                        onclick="downloadCurrentModel()"
+                    >
+                        Download
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+         ========================= -->
+
+    <script>
+
+
+        /* ==========================================================
+           MODEL DATABASE
+           ========================================================== */
+
+        const models = [
+
+            {
+                id: "rusty-box",
+
+                name: "Rusty Box",
+
+                description:
+                    "A rusty metal box asset. Great for environments, props and abandoned locations.",
+
+                category: "Prop",
+
+                tags: [
+                    "Prop",
+                    "Game Asset",
+                    "Free"
+                ],
+
+                format: "Blend, FBX, OBJ",
+
+                polycount: "Low Poly",
+
+                textures: "Included",
+
+                license: "CC BY 4.0",
+
+                preview: [
+
+                    {
+                        type: "image",
+
+                        src:
+                            "previews/box/box.png"
+                    }
+
+                ],
+
+                download:
+                    "https://sketchfab.com/3d-models/box-97c520c5eb7e4ad79787432471ccdf57"
+            },
+
+
+            {
+                id: "chairs",
+
+                name: "Foldable Chairs",
+
+                description:
+                    "A set of foldable chairs for outdoor scenes, games and environment projects.",
+
+                category: "Prop",
+
+                tags: [
+                    "Prop",
+                    "Furniture",
+                    "Free"
+                ],
+
+                format: "Blend, FBX, OBJ",
+
+                polycount: "Low Poly",
+
+                textures: "Included",
+
+                license: "CC BY 4.0",
+
+                preview: [
+
+                    {
+                        type: "image",
+
+                        src:
+                            "previews/chair/Chairs.png"
+                    },
+
+                    {
+                        type: "image",
+
+                        src:
+                            "previews/chair/Close-up.png"
+                    }
+
+                ],
+
+                download:
+                    "https://sketchfab.com/3d-models/folding-chair-37bf61f4d9af4b74a36ce0b06919fb8f"
+            },
+
+
+            {
+                id: "pillar",
+
+                name: "Stone Pillar",
+
+                description:
+                    "A decorative stone pillar designed for fantasy and historical environments.",
+
+                category: "Environment",
+
+                tags: [
+                    "Environment",
+                    "Stone",
+                    "Free"
+                ],
+
+                format: "Blend, FBX, OBJ",
+
+                polycount: "Low Poly",
+
+                textures: "Included",
+
+                license: "CC BY 4.0",
+
+                preview: [
+
+                    {
+                        type: "image",
+
+                        src:
+                            "previews/pillar/pillar render.png"
+                    },
+
+                    {
+                        type: "image",
+
+                        src:
+                            "previews/pillar/pillar close up.png"
+                    }
+
+                ],
+
+                download:
+                    "https://sketchfab.com/3d-models/pillar-ab1188c44a844190bfd22bfbee42af58"
+            },
+
+
+            {
+                id: "torch",
+
+                name: "Torch",
+
+                description:
+                    "A simple stylized torch suitable for fantasy scenes and game environments.",
+
+                category: "Prop",
+
+                tags: [
+                    "Prop",
+                    "Fantasy",
+                    "Free"
+                ],
+
+                format: "Blend, FBX, OBJ",
+
+                polycount: "Low Poly",
+
+                textures: "Included",
+
+                license: "CC BY 4.0",
+
+                preview: [
+
+                    {
+                        type: "image",
+
+                        src:
+                            "previews/torch/preview.png"
+                    },
+
+                    {
+                        type: "video",
+
+                        src:
+                            "https://res.cloudinary.com/dx52brl8s/video/upload/v1787481167/antorcha_qeo2vy.mkv"
+                    }
+
+                ],
+
+                download:
+                    "https://sketchfab.com/3d-models/torch-6fb9021bf2fe46598e09df5752a77ab3"
+            }
+
+        ];
+
+
+
+        /* ==========================================================
+           LIBRARY
+           ========================================================== */
+
+        let currentModel = null;
+
+        let currentPreview = 0;
+
+
+
+        function renderModels() {
+
+            const grid =
+                document.getElementById("model-grid");
+
+
+            const search =
+                document
+                    .getElementById("search")
+                    .value
+                    .toLowerCase();
+
+
+            const category =
+                document
+                    .getElementById("category-filter")
+                    .value;
+
+
+            const filtered =
+                models.filter(model => {
+
+                    const matchesSearch =
+
+                        model.name
+                            .toLowerCase()
+                            .includes(search)
+
+                        ||
+
+                        model.description
+                            .toLowerCase()
+                            .includes(search)
+
+                        ||
+
+                        model.tags.some(tag =>
+                            tag
+                                .toLowerCase()
+                                .includes(search)
+                        );
+
+
+                    const matchesCategory =
+
+                        category === "all"
+
+                        ||
+
+                        model.category === category;
+
+
+                    return (
+                        matchesSearch &&
+                        matchesCategory
+                    );
+
+                });
+
+
+            grid.innerHTML = "";
+
+
+            if (filtered.length === 0) {
+
+                grid.innerHTML =
+                    "<p>No models found.</p>";
+
+                return;
+
+            }
+
+
+            filtered.forEach(model => {
+
+                const card =
+                    document.createElement("article");
+
+
+                card.className =
+                    "model-card";
+
+
+                const firstPreview =
+                    model.preview[0];
+
+
+                let previewHTML = "";
+
+
+                if (firstPreview.type === "video") {
+
+                    previewHTML = `
+
+                        <video
+                            src="${firstPreview.src}"
+                            muted
+                            autoplay
+                            loop
+                            playsinline
+                        ></video>
+
+                    `;
+
+                }
+
+                else {
+
+                    previewHTML = `
+
+                        <img
+                            src="${firstPreview.src}"
+                            alt="${model.name} preview"
+                        >
+
+                    `;
+
+                }
+
+
+                card.innerHTML = `
+
+                    <div
+                        class="card-preview"
+                        onclick="openModel('${model.id}')"
+                    >
+
+                        ${previewHTML}
+
+                        <span class="preview-label">
+                            Click to view
+                        </span>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <h3>
+                            ${model.name}
+                        </h3>
+
+
+                        <p>
+                            ${model.description}
+                        </p>
+
+
+                        <div>
+
+                            ${model.tags
+                                .map(tag =>
+                                    `<span class="tag">
+                                        ${tag}
+                                    </span>`
+                                )
+                                .join("")
+                            }
+
+                        </div>
+
+
+                        <div class="card-actions">
+
+                            <button
+                                class="primary-button"
+                                onclick="openModel('${model.id}')"
+                            >
+                                View model
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                grid.appendChild(card);
+
+            });
+
+        }
+
+
+
+        /* ==========================================================
+           MODEL DETAIL
+           ========================================================== */
+
+        function openModel(id) {
+
+            const model =
+                models.find(
+                    item => item.id === id
+                );
+
+
+            if (!model) return;
+
+
+            currentModel = model;
+
+            currentPreview = 0;
+
+
+            document
+                .getElementById("library-view")
+                .style.display = "none";
+
+
+            document
+                .getElementById("detail-view")
+                .classList.add("visible");
+
+
+            document
+                .getElementById("detail-title")
+                .textContent = model.name;
+
+
+            document
+                .getElementById("detail-description")
+                .textContent = model.description;
+
+
+            document
+                .getElementById("detail-format")
+                .textContent = model.format;
+
+
+            document
+                .getElementById("detail-polycount")
+                .textContent = model.polycount;
+
+
+            document
+                .getElementById("detail-textures")
+                .textContent = model.textures;
+
+
+            document
+                .getElementById("detail-license")
+                .textContent = model.license;
+
+
+            document
+                .getElementById("detail-tags")
+                .innerHTML =
+
+                    model.tags
+                        .map(tag =>
+                            `<span class="tag">
+                                ${tag}
+                            </span>`
+                        )
+                        .join("");
+
+
+            renderPreview();
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+
+        /* ==========================================================
+           PREVIEWS
+           ========================================================== */
+
+        function renderPreview() {
+
+            if (!currentModel) return;
+
+
+            const preview =
+                currentModel.preview[currentPreview];
+
+
+            const container =
+                document.getElementById(
+                    "detail-media"
+                );
+
+
+            if (preview.type === "video") {
+
+                container.innerHTML = `
+
+                    <video
+                        src="${preview.src}"
+                        controls
+                        autoplay
+                        loop
+                        playsinline
+                    ></video>
+
+                `;
+
+            }
+
+            else {
+
+                container.innerHTML = `
+
+                    <img
+                        src="${preview.src}"
+                        alt="${currentModel.name} preview"
+                    >
+
+                `;
+
+            }
+
+
+            document
+                .getElementById("media-counter")
+                .textContent =
+                    `${currentPreview + 1} / ${currentModel.preview.length}`;
+
+        }
+
+
+
+        function nextPreview() {
+
+            if (!currentModel) return;
+
+
+            currentPreview++;
+
+
+            if (
+                currentPreview >=
+                currentModel.preview.length
+            ) {
+
+                currentPreview = 0;
+
+            }
+
+
+            renderPreview();
+
+        }
+
+
+
+        function previousPreview() {
+
+            if (!currentModel) return;
+
+
+            currentPreview--;
+
+
+            if (currentPreview < 0) {
+
+                currentPreview =
+                    currentModel.preview.length - 1;
+
+            }
+
+
+            renderPreview();
+
+        }
+
+
+
+        /* ==========================================================
+           BACK TO LIBRARY
+           ========================================================== */
+
+        function showLibrary() {
+
+            document
+                .getElementById("detail-view")
+                .classList.remove("visible");
+
+
+            document
+                .getElementById("library-view")
+                .style.display = "block";
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+
+        /* ==========================================================
+           DOWNLOAD
+           ========================================================== */
+
+        function downloadCurrentModel() {
+
+            if (!currentModel) return;
+
+
+            const link =
+                document.createElement("a");
+
+
+            link.href =
+                currentModel.download;
+
+
+            link.download =
+                `${currentModel.id}.zip`;
+
+
+            document.body.appendChild(link);
+
+
+            link.click();
+
+
+            link.remove();
+
+        }
+
+
+
+        /* ==========================================================
+           FILTER SHORTCUT
+           ========================================================== */
+
+        function filterCategory(category) {
+
+            showLibrary();
+
+
+            document
+                .getElementById("category-filter")
+                .value = category;
+
+
+            renderModels();
+
+        }
+
+
+
+        /* ==========================================================
+           LANGUAGE SWITCHER
+           ========================================================== */
+
+        const langSwitcher =
+            document.getElementById(
+                "lang-switcher"
+            );
+
+
+        langSwitcher.addEventListener(
+            "change",
+            async (e) => {
+
+                const selectedLang =
+                    e.target.value;
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "languages.json"
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    const elements =
+                        document.querySelectorAll(
+                            "[data-key]"
+                        );
+
+
+                    elements.forEach(
+                        element => {
+
+                            const key =
+                                element.getAttribute(
+                                    "data-key"
+                                );
+
+
+                            if (
+                                data[selectedLang] &&
+                                data[selectedLang][key]
+                            ) {
+
+                                element.innerHTML =
+                                    data[selectedLang][key];
+
+                            }
+
+                        }
+                    );
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "Could not load translations:",
+                        error
+                    );
+
+                }
+
+            }
+        );
+
+
+
+        /* ==========================================================
+           START PAGE
+           ========================================================== */
+
+        renderModels();
+
+    </script>
+
+</body>
+
+</html>

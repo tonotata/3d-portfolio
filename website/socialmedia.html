@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Tonota's social media and online platforms">
+
+    <link rel="icon" href="images/favicon.png">
+
+    <title>Tonota's Social Media</title>
+
+
+    <style>
+
+        /* =========================
+           GENERAL
+           ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background-color: #f3eadb;
+            color: #3b2a20;
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+
+        /* =========================
+           TOP NAVIGATION
+           ========================= */
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 20px 30px;
+
+            background-color: #4a3024;
+            border-bottom: 4px solid #8b634b;
+        }
+
+
+        /* Navigation buttons */
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-buttons a,
+        .nav-buttons button {
+            border: none;
+            background: none;
+
+            color: #f3eadb;
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 17px;
+            font-weight: bold;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            padding: 8px 12px;
+
+            transition: 0.25s ease;
+        }
+
+
+        /* Navigation hover */
+
+        .nav-buttons a:hover,
+        .nav-buttons button:hover {
+            color: #d6aa82;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           LANGUAGE SELECTOR
+           ========================= */
+
+        #lang-switcher {
+            padding: 7px 10px;
+
+            border: 1px solid #8b634b;
+            border-radius: 6px;
+
+            background-color: #f3eadb;
+            color: #3b2a20;
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           INTRODUCTION
+           ========================= */
+
+        .introduction {
+            text-align: center;
+
+            max-width: 900px;
+
+            margin: 55px auto 35px;
+
+            padding: 0 20px;
+        }
+
+        .introduction h1 {
+            margin-bottom: 12px;
+
+            color: #4a3024;
+
+            font-size: 42px;
+        }
+
+        .introduction h3 {
+            margin-top: 0;
+
+            color: #765541;
+
+            font-size: 18px;
+
+            font-weight: normal;
+        }
+
+
+        /* =========================
+           SOCIAL MEDIA CONTAINER
+           ========================= */
+
+        .social-container {
+            max-width: 850px;
+
+            margin: 40px auto 60px;
+
+            padding: 0 20px;
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+
+        /* =========================
+           SOCIAL CARDS
+           ========================= */
+
+        .social-card {
+            display: flex;
+
+            align-items: center;
+
+            padding: 22px;
+
+            background-color: #e7d7c3;
+
+            border: 2px solid #8b634b;
+
+            border-radius: 12px;
+
+            color: #3b2a20;
+
+            text-decoration: none;
+
+            box-shadow: 0 6px 15px rgba(59, 42, 32, 0.15);
+
+            transition: 0.25s ease;
+        }
+
+
+        /* Social card hover */
+
+        .social-card:hover {
+            transform: translateY(-5px);
+
+            background-color: #dfcbb4;
+
+            box-shadow: 0 10px 25px rgba(59, 42, 32, 0.25);
+        }
+
+
+        /* =========================
+           SOCIAL ICON
+           ========================= */
+
+        .social-icon {
+            width: 65px;
+            height: 65px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            margin-right: 18px;
+
+            background-color: #4a3024;
+
+            color: #f3eadb;
+
+            border-radius: 10px;
+
+            font-size: 28px;
+
+            flex-shrink: 0;
+        }
+
+
+        /* =========================
+           SOCIAL INFORMATION
+           ========================= */
+
+        .social-info h2 {
+            margin: 0 0 4px;
+
+            color: #4a3024;
+
+            font-size: 22px;
+        }
+
+        .social-info p {
+            margin: 0 0 5px;
+
+            color: #6b4937;
+
+            font-size: 16px;
+
+            font-weight: bold;
+        }
+
+        .social-info span {
+            color: #765541;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           FOOTER
+           ========================= */
+
+        .social-footer {
+            text-align: center;
+
+            margin-top: 30px;
+
+            padding: 25px;
+
+            color: #765541;
+
+            font-size: 16px;
+        }
+
+
+        /* =========================
+           MOBILE
+           ========================= */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 15px;
+
+                gap: 10px;
+            }
+
+            .nav-buttons {
+                flex-wrap: wrap;
+
+                gap: 5px;
+            }
+
+            .nav-buttons a,
+            .nav-buttons button {
+                font-size: 14px;
+
+                padding: 6px 8px;
+            }
+
+            #lang-switcher {
+                flex-shrink: 0;
+            }
+
+
+            .introduction h1 {
+                font-size: 30px;
+            }
+
+
+            .social-container {
+                grid-template-columns: 1fr;
+
+                width: 94%;
+
+                margin-top: 30px;
+
+                padding: 0;
+            }
+
+
+            .social-card {
+                padding: 18px;
+            }
+
+
+            .social-icon {
+                width: 55px;
+                height: 55px;
+
+                font-size: 24px;
+
+                margin-right: 14px;
+            }
+
+
+            .social-info h2 {
+                font-size: 20px;
+            }
+
+            .social-info p {
+                font-size: 14px;
+            }
+
+            .social-info span {
+                font-size: 13px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         TOP NAVIGATION
+         ========================= -->
+
+    <div class="navbar">
+
+        <div class="nav-buttons">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="3dlibrary.html">
+                3D Library
+            </a>
+
+            <a href="socialmedia.html">
+                Social Media
+            </a>
+
+        </div>
+
+
+        <select id="lang-switcher">
+
+            <option value="en">
+                English
+            </option>
+
+            <option value="es">
+                Español
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- =========================
+         INTRODUCTION
+         ========================= -->
+
+    <div class="introduction">
+
+        <h1>
+            Social Media
+        </h1>
+
+        <h3 data-key="follow">
+            Follow me and keep up with new projects,
+            models and updates! <br> Feel free to 
+            request a model!
+        </h3>
+
+    </div>
+
+
+    <!-- =========================
+         SOCIAL MEDIA
+         ========================= -->
+
+    <div class="social-container">
+
+
+        <!-- Instagram -->
+
+        <a
+            class="social-card"
+            href="https://www.instagram.com/tonotq/"
+            target="_blank"
+        >
+
+            <div class="social-icon">
+                🎨
+            </div>
+
+            <div class="social-info">
+
+                <h2>
+                    Instagram
+                </h2>
+
+                <p>
+                    @tonotq
+                </p>
+
+                <span>
+                    You can ask me to make models there!
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <!-- TikTok -->
+
+        <a
+            class="social-card"
+            href="https://www.tiktok.com/@tonotilla"
+            target="_blank"
+        >
+
+            <div class="social-icon">
+                🎵
+            </div>
+
+            <div class="social-info">
+
+                <h2>
+                    TikTok
+                </h2>
+
+                <p>
+                    @tonotilla
+                </p>
+
+                <span>
+                    Animations, maybe some tips
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <!-- YouTube -->
+
+        <a
+            class="social-card"
+            href="https://www.youtube.com/@tonoota"
+            target="_blank"
+        >
+
+            <div class="social-icon">
+                ▶
+            </div>
+
+            <div class="social-info">
+
+                <h2>
+                    YouTube
+                </h2>
+
+                <p>
+                    tonota
+                </p>
+
+                <span>
+                    I'll start there soon!
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <!-- Discord -->
+
+        <a
+            class="social-card"
+            href="#"
+            target="_blank"
+        >
+
+            <div class="social-icon">
+                💬
+            </div>
+
+            <div class="social-info">
+
+                <h2>
+                    Discord
+                </h2>
+
+                <p>
+                    Tonota's Community
+                </p>
+
+                <span>
+                    COMING SOON!
+                </span>
+
+            </div>
+
+        </a>
+
+
+    </div>
+
+
+    <!-- =========================
+         FOOTER
+         ========================= -->
+
+    <footer class="social-footer">
+
+        <p>
+            Thanks for supporting me!
+        </p>
+
+    </footer>
+
+
+</body>
+
+<script>
+
+    const langSwitcher = document.getElementById('lang-switcher');
+
+langSwitcher.addEventListener('change', async (e) => {
+    const selectedLang = e.target.value;
+    
+    // Fetch the JSON file containing translations
+    const response = await fetch('languages.json');
+    const data = await response.json();
+    
+    // Find all elements with a data-key attribute
+    const elements = document.querySelectorAll('[data-key]');
+    
+    // Replace text based on the selected language
+    elements.forEach(element => {
+        const key = element.getAttribute('data-key');
+        element.innerHTML = data[selectedLang][key];
+    });
+});
+
+</script>
+
+</html>
