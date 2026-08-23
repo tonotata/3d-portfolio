@@ -42,71 +42,93 @@
 
 
         /* =========================
-           NAVIGATION
-           ========================= */
+   TOP NAVIGATION
+   ========================= */
 
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 100;
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: #4a3024;
+    border-bottom: 4px solid #8b634b;
+}
 
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+/* Navigation buttons on the LEFT */
 
-            padding: 12px 25px;
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
 
-            background: var(--brown-dark);
-            border-bottom: 4px solid var(--brown-light);
+.nav-buttons a,
+.nav-buttons button {
+    border: none;
+    background: none;
+    color: #f3eadb;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    transition: 0.25s ease;
+}
 
-            box-shadow: 0 4px 15px var(--shadow);
-        }
+/* Hover */
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
+.nav-buttons a:hover,
+.nav-buttons button:hover {
+    color: #d6aa82;
+    transform: translateY(-2px);
+}
 
-        .nav-links a {
-            color: var(--cream);
+/* =========================
+   LANGUAGE SELECTOR
+   ========================= */
 
-            font: bold 16px Georgia, "Times New Roman", serif;
+.nav-right {
+    display: flex;
+    align-items: center;
+}
 
-            text-decoration: none;
+#lang-switcher {
+    padding: 7px 10px;
+    border: 1px solid #8b634b;
+    border-radius: 6px;
+    background-color: #f3eadb;
+    color: #3b2a20;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    cursor: pointer;
+}
 
-            transition: 0.2s ease;
-        }
+/* =========================
+   MOBILE
+   ========================= */
 
-        .nav-links a:hover {
-            color: #d8b18f;
-            transform: translateY(-1px);
-        }
+@media (max-width: 700px) {
+    .navbar {
+        padding: 15px;
+        gap: 10px;
+    }
 
+    .nav-buttons {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
 
-        /* =========================
-           LANGUAGE SELECTOR
-           ========================= */
+    .nav-buttons a,
+    .nav-buttons button {
+        font-size: 14px;
+        padding: 6px 8px;
+    }
 
-        .nav-right {
-            display: flex;
-            align-items: center;
-        }
-
-        #lang-switcher {
-            padding: 7px 10px;
-
-            border: 1px solid #8b634b;
-            border-radius: 6px;
-
-            background-color: #f3eadb;
-            color: #3b2a20;
-
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 14px;
-
-            cursor: pointer;
-        }
+    #lang-switcher {
+        flex-shrink: 0;
+    }
+}
 
 
         /* =========================
@@ -513,26 +535,6 @@
             background: var(--brown-light);
         }
 
-
-        /* =========================
-           MOBILE
-           ========================= */
-
-        @media (max-width: 800px) {
-
-            nav {
-                gap: 12px;
-            }
-
-            nav a {
-                font-size: 13px;
-            }
-
-            .detail-layout {
-                grid-template-columns: 1fr;
-            }
-        }
-
         @media (max-width: 500px) {
 
             nav {
@@ -564,9 +566,9 @@
          NAVIGATION
          ========================= -->
 
-    <nav>
+    <nav class="navbar">
 
-        <div class="nav-links">
+        <div class="nav-buttons">
 
             <a href="index.html">
                 Home
